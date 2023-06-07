@@ -6,7 +6,7 @@
 /*   By: jpes <jpes@student.42nice.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 20:12:25 by jpes              #+#    #+#             */
-/*   Updated: 2023/06/07 18:14:30 by jpes             ###   ########.fr       */
+/*   Updated: 2023/06/07 18:25:22 by jpes             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,23 @@ int	ft_strlen(char *str)
 
 char	*ft_strchr(char *s, int c)
 {
-	while (*s)
+	char	*str;
+	int		i;
+
+	i = 0;
+	str = (char *)s;
+	while (str[i] != '\0')
 	{
-		if (*s == c)
+		if (str[i] == (char) c)
 		{
-			return ((char *)s);
+			return (&str[i]);
 		}
-		s++;
+		i++;
 	}
-	if (c == '\0')
-		return ((char *)s);
+	if (str[i] == (char) c)
+	{
+		return (&str[i]);
+	}
 	return (0);
 }
 
