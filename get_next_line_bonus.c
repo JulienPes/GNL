@@ -6,13 +6,13 @@
 /*   By: jpes <jpes@student.42nice.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 14:34:32 by jpes              #+#    #+#             */
-/*   Updated: 2023/06/07 18:16:54 by jpes             ###   ########.fr       */
+/*   Updated: 2023/06/12 10:48:37 by jpes             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char	*ft_get_before_line(int fd, char *buffer, char *stash)
+char	*ft_read_and_get(int fd, char *buffer, char *stash)
 {
 	int		bytes_read;
 	char	*temp;
@@ -38,7 +38,7 @@ char	*ft_get_before_line(int fd, char *buffer, char *stash)
 	return (stash);
 }
 
-char	*ft_get_after_line(char *line)
+char	*ft_put_right_place(char *line)
 {
 	char	*stash;
 	size_t	n;
@@ -75,49 +75,11 @@ char	*get_next_line(int fd)
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (0);
-	line = ft_get_before_line(fd, buffer, stash[fd]);
+	line = ft_read_and_get(fd, buffer, stash[fd]);
 	free(buffer);
 	buffer = NULL;
 	if (!line)
 		return (NULL);
-	stash[fd] = ft_get_after_line(line);
+	stash[fd] = ft_put_right_place(line);
 	return (line);
 }
-// int	main	(void)
-// {
-// 	int fd;
-// 	char *str;
-// 	char *teste = NULL;
-// 	printf("%s\n", teste);
-// 	fd = open("file.txt", O_RDONLY);
-// 	printf("fd -> %d\n", fd);
-// 	str = get_next_line(fd);
-// 	printf("get_next_line 1 %s", str);
-// 	str = get_next_line(fd);
-// 	printf("get_next_line 2 %s", str);
-// 	str = get_next_line(fd);
-// 	printf("get_next_line 3 %s", str);
-// 	str = get_next_line(fd);
-// 	printf("get_next_line 4 %s", str);
-// 	str = get_next_line(fd);
-// 	printf("get_next_line 5 %s", str);
-// 	str = get_next_line(fd);
-// 	printf("get_next_line 6 %s", str);
-// 	str = get_next_line(fd);
-// 	// printf("get_next_line 7 %s", str);
-// 	// printf("get_nxt_line 8 %s", get_next_line(fd));
-// 	// printf("get_nxt_line 9 %s", get_next_line(fd));
-// 	// printf("get_nxt_line 10 %s", get_next_line(fd));
-// 	// printf("get_next_line 11 %s", str);
-// 	// printf("get_nxt_line 12 %s", get_next_line(fd));
-// 	// printf("get_nxt_line 13 %s", get_next_line(fd));
-// 	// printf("get_nxt_line 14 %s", get_next_line(fd));
-// 	// // str = get_next_line(fd);
-// 	// // printf("get_next_line 8 %s", str);
-// 	// // system("leaks a.out");
-// 	// // printf("%s", str);
-// 	// // str = get_next_line(fd);
-// 	// // system("leaks a.out");
-// 	// // printf("%s\n", str);
-// 	return (0);
-// }

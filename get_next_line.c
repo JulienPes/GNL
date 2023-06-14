@@ -6,13 +6,13 @@
 /*   By: jpes <jpes@student.42nice.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:12:48 by jpes              #+#    #+#             */
-/*   Updated: 2023/06/07 17:51:42 by jpes             ###   ########.fr       */
+/*   Updated: 2023/06/12 10:27:54 by jpes             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_get_before_line(int fd, char *buffer, char *stash)
+char	*ft_read_and_get(int fd, char *buffer, char *stash)
 {
 	int		bytes_read;
 	char	*temp;
@@ -38,7 +38,7 @@ char	*ft_get_before_line(int fd, char *buffer, char *stash)
 	return (stash);
 }
 
-char	*ft_get_after_line(char *line)
+char	*ft_put_right_place(char *line)
 {
 	char	*stash;
 	size_t	n;
@@ -75,11 +75,11 @@ char	*get_next_line(int fd)
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (0);
-	line = ft_get_before_line(fd, buffer, stash);
+	line = ft_read_and_get(fd, buffer, stash);
 	free(buffer);
 	buffer = NULL;
 	if (!line)
 		return (NULL);
-	stash = ft_get_after_line(line);
+	stash = ft_put_right_place(line);
 	return (line);
 }
